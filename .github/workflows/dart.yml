@@ -41,6 +41,7 @@ jobs:
         flutter clean
         flutter pub get
         flutter pub global activate l10n
+        flutter pub global activate --source git https://github.com/nguoianphu/dart-l10n-gettext
         flutter build apk --split-per-abi
 
     - name: artifact app-armeabi-v7a-release
