@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:io' show Platform;
 
 import 'package:fluent_reader_lite/models/service.dart';
 import 'package:fluent_reader_lite/pages/article_page.dart';
@@ -25,7 +25,8 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'generated/l10n.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'models/global_model.dart';
 
 void main() async {
@@ -42,8 +43,9 @@ void main() async {
   SystemChannels.lifecycle.setMessageHandler((msg) {
     if (msg == AppLifecycleState.resumed.toString()) {
       if (Global.server != null) Global.server.restart();
-      if (Global.globalModel.syncOnStart
-        && DateTime.now().difference(Global.syncModel.lastSynced).inMinutes >= 10) {
+      if (Global.globalModel.syncOnStart &&
+          DateTime.now().difference(Global.syncModel.lastSynced).inMinutes >=
+              10) {
         Global.syncModel.syncWithService();
       }
     }
@@ -67,7 +69,8 @@ class MyApp extends StatelessWidget {
     "/settings/service/inoreader": (context) => InoreaderPage(),
     "/settings/service/greader": (context) => GReaderPage(),
     "/settings/service": (context) {
-      var serviceType = SyncService.values[Store.sp.getInt(StoreKeys.SYNC_SERVICE) ?? 0];
+      var serviceType =
+          SyncService.values[Store.sp.getInt(StoreKeys.SYNC_SERVICE) ?? 0];
       switch (serviceType) {
         case SyncService.None:
           break;
@@ -103,7 +106,8 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           localizationsDelegates: [
             // ... app-specific localization delegate[s] here
-            S.delegate,
+            AppLocalizations.delegate,
+            AppLocalizations.delegate, // Add this line
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
@@ -117,9 +121,12 @@ class MyApp extends StatelessWidget {
           ],
           localeResolutionCallback: (_locale, supportedLocales) {
             _locale = Locale(_locale.languageCode);
-            if (globalModel.locale != null) return globalModel.locale;
-            else if (supportedLocales.contains(_locale)) return _locale;
-            else return Locale("en");
+            if (globalModel.locale != null)
+              return globalModel.locale;
+            else if (supportedLocales.contains(_locale))
+              return _locale;
+            else
+              return Locale("en");
           },
           theme: CupertinoThemeData(
             primaryColor: CupertinoColors.systemBlue,
@@ -133,9 +140,9 @@ class MyApp extends StatelessWidget {
             final mediaQueryData = MediaQuery.of(context);
             if (Global.globalModel.textScale == null) return child;
             return MediaQuery(
-              data: mediaQueryData.copyWith(textScaleFactor: Global.globalModel.textScale),
-              child: child
-            );
+                data: mediaQueryData.copyWith(
+                    textScaleFactor: Global.globalModel.textScale),
+                child: child);
           },
         ),
       ),

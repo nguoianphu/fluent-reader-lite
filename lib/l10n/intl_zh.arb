@@ -22,7 +22,14 @@
     "markAll": "全部标为已读",
     "markAbove": "将以上标为已读",
     "markBelow": "将以下标为已读",
-    "daysAgo": "超过 {days} 天前",
+    "daysAgo": "{days, plural, =1 {Over 1 day ago} other {Over {days} days ago}}",
+        "@daysAgo": {
+    "description": "days ago",
+    "type": "text",
+    "placeholders": {
+      "days": {}
+      }
+    },
     "star": "标为星标",
     "unstar": "取消星标",
     "share": "分享",
