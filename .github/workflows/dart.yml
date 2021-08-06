@@ -36,6 +36,7 @@ jobs:
       run: |
         rm -rf build || true
         rm -rf .idea || true
+        rm -rf .vscode || true
         rm -rf *.lock || true
         flutter clean
         flutter pub get
