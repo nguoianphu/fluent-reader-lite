@@ -1,6 +1,7 @@
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'
+    show AppLocalizations;
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show BuildContext, Navigator, Text;
 import 'package:http/http.dart' as http;
 import 'package:lpinyin/lpinyin.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -41,6 +42,7 @@ abstract class Utils {
         if (contentType != null && contentType.startsWith("image")) flag = true;
       }
     } finally {
+      // ignore: control_flow_in_finally
       return flag;
     }
   }
